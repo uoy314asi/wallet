@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="content" align="center">
+        <h2 align="center">Sign Up Form:</h2>
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Email:</span>
+                <input type="email" name="email" class="form-control" aria-describedby="basic-addon1" required>
+            </div>
+            {% if msg %}
+                <span style="color: red">{{ msg }}</span>
+            {% endif %}
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon2">Password1:</span>
+                <input type="password" id="password" name="password1" onkeyup="check()" class="form-control" aria-describedby="basic-addon2" required>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Password2:</span>
+                <input type="password" id="confirm_password" name="password2" onkeyup="check()" class="form-control" aria-describedby="basic-addon3" required>
+            </div>
+            <span id='message'></span>
+            <br>
+            <button class="btn btn-primary" id="submit_button" type="submit" disabled="disabled">Sign Up</button>
+        </form>
+    </div>
+    <script>
+        var check = function() {
+            if (document.getElementById('password').value == document.getElementById('confirm_password').value) {
+                document.getElementById('message').style.color = 'green';
+                document.getElementById('message').innerHTML = 'Passwords matching';
+                document.getElementById('submit_button').disabled = '';
+            } else {
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = 'Passwords not matching';
+                document.getElementById('submit_button').disabled = 'disabled';
+            }
+        }
+    </script>
+{% endblock content %}

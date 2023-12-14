@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="content" align="center">
+        <h2 align="center">Change Profile Form:</h2>
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon2">First Name:</span>
+                <input type="text" name="name" class="form-control" aria-describedby="basic-addon2" value="{{ user.name }}" required>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon3">Last Name:</span>
+                <input type="text" name="surname" class="form-control" aria-describedby="basic-addon3" value="{{ user.surname }}" required>
+            </div>
+            <button class="btn btn-primary" id="submit_button" type="submit">Change Profile</button>
+        </form>
+    </div>
+{% endblock content %}

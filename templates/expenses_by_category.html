@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="content" align="center">
+        <h2 align="center">{{ category.name }}</h2>
+        <hr>
+        {% for expense in expenses %}
+            <div class="row g-0 text-center">
+                <div class="col-sm-6 col-md-4">{{ expense.name }}</div>
+                <div class="col-sm-6 col-md-4">{{ expense.created_at }}</div>
+                <div class="col-6 col-md-4" style="color: green">{{ expense.amount }} {{ user.currency }}</div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

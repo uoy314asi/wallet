@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="content" align="center">
+    <h2 align="center">Add Expense Form:</h2>
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Name:</span>
+            <input type="text" name="name" class="form-control" aria-describedby="basic-addon1" required>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon2">Amount:</span>
+            <input type="number" name="amount" class="form-control" aria-describedby="basic-addon2" required>
+            <select name="currency">
+                {% for currency in currencies %}
+                    <option value="{{ currency }}">
+                        {{ currency }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon3">Category:</span>
+            <select name="category">
+                {% for category in categories.all %}
+                    <option value="{{ category.id }}">
+                        {{ category.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon4">Date:</span>
+            <input type="datetime-local" id="datetime_input" name="created_at" class="form-control" aria-describedby="basic-addon1" required>
+        </div>
+        <button class="btn btn-success" id="submit_button" type="submit">Add New Expense</button>
+    </form>
+</div>
+<script>
+    window.addEventListener("load", function() {
+        var now = new Date();
+        var offset = now.getTimezoneOffset() * 60000;
+        var adjustedDate = new Date(now.getTime() - offset);
+        var formattedDate = adjustedDate.toISOString().substring(0,16);
+        var datetimeField = document.getElementById("datetime_input");
+        datetimeField.value = formattedDate;
+    });
+</script>
+{% endblock content %}

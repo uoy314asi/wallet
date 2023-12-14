@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="content" align="center">
+        <h2 align="center">Add Funds Form:</h2>
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon2">Funds:</span>
+                <input type="number" name="funds" class="form-control" aria-describedby="basic-addon2" required>
+                <select name="currency">
+                    {% for currency in currencies %}
+                        <option value="{{ currency }}">
+                            {{ currency }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button class="btn btn-primary" id="submit_button" type="submit">Add Funds</button>
+        </form>
+    </div>
+{% endblock content %}

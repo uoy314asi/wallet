@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="content">
+        <div class="text-center">
+            {% if user.photo %}
+                <img src="{{ user.photo.url }}" class="rounded avatar" alt="...">
+            {% else %}
+                <img src="{% static 'images/user.png' %}" class="rounded avatar" alt="...">
+            {% endif %}
+            <h3>{{ user.email }}</h3>
+            <h4>{{ user.surname }} {{ user.name }}</h4>
+            <h4 style="color: green">{{ wallet }} {{ user.currency }}</h4>
+            <button class="btn btn-primary" onclick="location.href='{% url 'change_profile_url' %}';" type="button">Change Info</button>
+            <button class="btn btn-success" onclick="location.href='{% url 'add_funds_url' %}';" type="button">Add Funds</button>
+            <form action="{% url 'reset_wallet_url' %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-danger" type="submit">Reset Wallet</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,14 @@
+.content {
+    max-width: 50vw;
+    margin: 0 auto;
+    margin-top: 5vh;
+}
+
+.input-group {
+    margin: 3vh;
+    max-width: 90%;
+}
+
+.avatar {
+    max-width: 200px;
+}

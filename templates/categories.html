@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="content" align="center">
+        <div id="graph"></div>
+        {% for category in categories %}
+            <div class="row g-0 text-center">
+                <div class="col-sm-6 col-md-8">
+                    <a href="{% url 'expenses_by_category_url' category.id %}" class="link-underline-primary link-offset-2">
+                        {{ category.name }}
+                    </a>
+                </div>
+                <div class="col-6 col-md-4" style="color: green">{{ category.amount }}</div>
+            </div>
+        {% endfor %}
+        <hr>
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon2">Category Name:</span>
+                <input type="text" name="category_name" class="form-control" aria-describedby="basic-addon2" required>
+            </div>
+            <button class="btn btn-success" id="submit_button" type="submit">Add New Category</button>
+        </form>
+    </div>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+    <script>
+        let graph = document.getElementById('graph');
+
+        var data = [{
+            values: [
+                {% for category in categories %}
+                    '{{ category.amount }}',
+                {% endfor %}
+            ],
+            labels: [
+                {% for category in categories %}
+                    '{{ category.name }}',
+                {% endfor %}
+            ],
+            type: 'pie'
+        }];
+
+        var layout = {
+          height: 400,
+          width: 400
+        };
+
+        Plotly.newPlot(graph, data, layout);
+    </script>
+{% endblock content %}
